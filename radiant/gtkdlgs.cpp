@@ -56,7 +56,6 @@
 #include "gtkutil/guisettings.h"
 #include <QPlainTextEdit>
 #include <QComboBox>
-#include <QTextEdit>
 
 #include "os/path.h"
 #include "math/aabb.h"
@@ -406,7 +405,7 @@ void DoAbout(){
 class TextEditor
 {
 	QWidget *m_window = 0;
-	QTextEdit *m_textView; // slave, text widget from the gtk editor
+	QPlainTextEdit *m_textView; // slave, text widget from the gtk editor
 	QPushButton *m_button; // save button
 	CopiedString m_filename;
 
@@ -417,9 +416,8 @@ class TextEditor
 		auto *vbox = new QVBoxLayout( m_window );
 		vbox->setContentsMargins( 0, 0, 0, 0 );
 
-		m_textView = new QTextEdit;
-		m_textView->setAcceptRichText( false );
-		m_textView->setLineWrapMode( QTextEdit::LineWrapMode::NoWrap );
+		m_textView = new QPlainTextEdit;
+		m_textView->setLineWrapMode( QPlainTextEdit::LineWrapMode::NoWrap );
 		vbox->addWidget( m_textView );
 
 		m_button = new QPushButton( "Save" );
