@@ -947,6 +947,7 @@ void EntityInspector_setEntityClass( EntityClass *eclass ){
 			delete item->widget();
 			delete item;
 		}
+		g_attributeBox->update(); // trigger scrollbar update
 		GlobalEntityAttributes_clear();
 
 		for ( const EntityClassAttributePair &pair : eclass->m_attributes )
