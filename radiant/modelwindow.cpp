@@ -1293,7 +1293,7 @@ QWidget* ModelBrowser_constructWindow( QWidget* toplevel ){
 		g_ModelBrowser.m_treeView->setUniformRowHeights( true ); // optimization
 		g_ModelBrowser.m_treeView->setFocusPolicy( Qt::FocusPolicy::ClickFocus );
 		g_ModelBrowser.m_treeView->setExpandsOnDoubleClick( false );
-		g_ModelBrowser.m_treeView->header()->setStretchLastSection( false ); // non greedy column sizing; + QHeaderView::ResizeMode::ResizeToContents = no text elision ?????
+		g_ModelBrowser.m_treeView->header()->setStretchLastSection( false ); // non greedy column sizing; + QHeaderView::ResizeMode::ResizeToContents = no text elision
 		g_ModelBrowser.m_treeView->header()->setSectionResizeMode( QHeaderView::ResizeMode::ResizeToContents );
 
 
@@ -1352,7 +1352,7 @@ typedef ReferenceCaller1<CopiedString, const char*, FoldersToLoadImport> Folders
 void ModelBrowser_constructPage( PreferenceGroup& group ){
 	PreferencesPage page( group.createPage( "Model Browser", "Model Browser Preferences" ) );
 
-	page.appendSpinner( "Model View Size", 16.0, 8192.0,
+	page.appendSpinner( "Model View Size", 16, 8192,
 	                    IntImportCallback( CellSizeImportCaller( g_ModelBrowser.m_cellSize ) ),
 	                    IntExportCallback( IntExportCaller( g_ModelBrowser.m_cellSize ) ) );
 	page.appendEntry( "List of *folderToLoad/depth*",
