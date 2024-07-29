@@ -8,7 +8,8 @@ add_library(quickhull STATIC
             ConvexHull.hpp
             HalfEdgeMesh.hpp
             MathUtils.hpp
+            Tests/QuickHullTests.cpp
+            Tests/main.cpp
             QuickHull.cpp
             QuickHull.hpp
-            Types.hpp
            )
