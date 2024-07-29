@@ -418,7 +418,7 @@ class TextEditor
 		g_guiSettings.addWindow( m_window, "ShaderEditor/geometry" );
 
 		auto *vbox = new QVBoxLayout( m_window );
-		vbox->setContentsMargins( 0, 0, 0, 0 );
+		vbox->setContentsMargins( 4, 0, 4, 4 );
 
 		m_textView = new QPlainTextEdit;
 		m_textView->setLineWrapMode( QPlainTextEdit::LineWrapMode::NoWrap );
