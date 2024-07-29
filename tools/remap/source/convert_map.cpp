@@ -225,11 +225,11 @@ static void ConvertEPairs( FILE *f, const entity_t& e, bool skip_origin ){
 static int ConvertBSPToMap_Ext( char *bspName, bool brushPrimitives )
 {
 	// Note it 
-	Sys_FPrintf(SYS_VRB, "--- Convert BSP to MAP ---\n");
+	Sys_FPrintf( SYS_VRB, "--- Convert BSP to MAP ---\n" );
 
 	// Create map filename from the bsp name
-	auto name = StringOutputStream(256)(PathExtensionless(bspName), "_converted.map");
-	Sys_Printf("writing %s\n", name.c_str());
+	const auto name = StringStream( PathExtensionless( bspName ), "_converted.map" );
+	Sys_Printf( "writing %s\n", name.c_str() );
 
 	// Open map file
 	FILE* f = SafeOpenWrite(name);

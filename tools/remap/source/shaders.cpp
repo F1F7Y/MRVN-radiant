@@ -300,7 +300,7 @@ void BeginMapShaderFile(const char *mapFile) {
     mapName(PathFilename(mapFile));
 
     /* append ../scripts/q3map2_<mapname>.shader */
-    mapShaderFile = StringOutputStream(256)(PathFilenameless(mapFile), "../", g_game->shaderPath,
+    mapShaderFile = StringStream(PathFilenameless(mapFile), "../", g_game->shaderPath,
                                             "/q3map2_", mapName.c_str(), ".shader");
     Sys_FPrintf(SYS_VRB, "Map has shader script %s\n", mapShaderFile.c_str());
 
@@ -980,7 +980,7 @@ void LoadShaderInfo() {
     }
 
     /* we can pile up several shader files, the one in baseq3 and ones in the mod dir or other spots */
-    const auto  filename = StringOutputStream(64)(g_game->shaderPath, "/shaderlist.txt");
+    const auto  filename = StringStream<64>(g_game->shaderPath, "/shaderlist.txt");
     const int   count = vfsGetFileCount(filename);
 
     /* load them all */
@@ -1011,21 +1011,21 @@ void LoadShaderInfo() {
         }
     }
 
-    if (shaderFiles.empty()) {
-        Sys_Printf("%s", "No shaderlist.txt found: loading all shaders\n");
-        shaderFiles = vfsListShaderFiles(g_game->shaderPath);
+    if ( shaderFiles.empty() ) {
+        Sys_Printf( "%s", "No shaderlist.txt found: loading all shaders\n" );
+        shaderFiles = vfsListShaderFiles( g_game->shaderPath );
     }
 
     /* parse the shader files */
-    for (const CopiedString& file : shaderFiles) {
-            ParseShaderFile(StringOutputStream(64)(g_game->shaderPath, '/', file));
+    for ( const CopiedString& file : shaderFiles ) {
+            ParseShaderFile( StringStream<64>( g_game->shaderPath, '/', file ) );
     }
 
     /* emit some statistics */
-    Sys_FPrintf(SYS_VRB, "%9d shaderInfo\n", numShaderInfo);
+    Sys_FPrintf( SYS_VRB, "%9d shaderInfo\n", numShaderInfo );
 
-    if (numShaderInfo == 0)
-            Sys_FPrintf(SYS_WRN, "WARNING: 0 shaders loaded! Make sure you setup your shader directory and shader definitions properly!\n");
+    if ( numShaderInfo == 0 )
+            Sys_FPrintf( SYS_WRN, "WARNING: 0 shaders loaded! Make sure you setup your shader directory and shader definitions properly!\n" );
     
-    Sys_FPrintf(SYS_VRB, "\n");
+    Sys_FPrintf( SYS_VRB, "\n" );
 }

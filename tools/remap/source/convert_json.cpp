@@ -176,11 +176,11 @@ int ConvertJsonMain( Args& args ){
 		Sys_Printf( "Loading %s\n", source );
 		LoadBSPFile( source );
 		ParseEntities();
-		write_json( StringOutputStream( 256 )( PathExtensionless( source ), '/' ) );
+		write_json( StringStream( PathExtensionless( source ), '/' ) );
 	}
 	else{
 		/* write bsp */
-		read_json( StringOutputStream( 256 )( PathExtensionless( source ), '/' ), useFlagNames, skipUnknownFlags );
+		read_json( StringStream( PathExtensionless( source ), '/' ), useFlagNames, skipUnknownFlags );
 		UnparseEntities();
 		path_set_extension( source, "_json.bsp" );
 		Sys_Printf( "Writing %s\n", source );

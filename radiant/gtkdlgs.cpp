@@ -364,12 +364,12 @@ void DoAbout(){
 				hbox->addWidget( buttons );
 				{
 					auto button = buttons->addButton( "Credits", QDialogButtonBox::ButtonRole::NoRole );
-					QObject::connect( button, &QPushButton::clicked, [](){ OpenURL( StringOutputStream( 256 )( AppPath_get(), "credits.html" ) ); } );
+					QObject::connect( button, &QPushButton::clicked, [](){ OpenURL( StringStream( AppPath_get(), "credits.html" ) ); } );
 					button->setEnabled( false );
 				}
 				{
 					auto button = buttons->addButton( "Changelog", QDialogButtonBox::ButtonRole::NoRole );
-					QObject::connect( button, &QPushButton::clicked, [](){ OpenURL( StringOutputStream( 256 )( AppPath_get(), "changelog.txt" ) ); } );
+					QObject::connect( button, &QPushButton::clicked, [](){ OpenURL( StringStream( AppPath_get(), "changelog.txt" ) ); } );
 					button->setEnabled( false );
 				}
 				{
@@ -528,13 +528,13 @@ bool DoLightIntensityDlg( int *intensity ){
 }
 
 void DoShaderInfoDlg( const char* name, const char* filename, const char* title ){
-	StringOutputStream text( 256 );
-	text << "&nbsp;&nbsp;The selected shader<br>";
-	text << "<b>" << name << "</b><br>";
-	text << "&nbsp;&nbsp;is located in file<br>";
-	text << "<b>" << filename << "</b>";
-
-	qt_MessageBox( MainFrame_getWindow(), text.c_str(), title );
+	const auto text = StringStream(
+		"&nbsp;&nbsp;The selected shader<br>"
+		"<b>", name, "</b><br>"
+		"&nbsp;&nbsp;is located in file<br>"
+		"<b>", filename, "</b>"
+	);
+	qt_MessageBox( MainFrame_getWindow(), text, title );
 }
 
 // =============================================================================
@@ -662,7 +662,7 @@ retry:
 				if( copiedN == files.size() )
 					qt_MessageBox( &dialog, "All files have been copied.", "Great Success!" );
 				else if( copiedN != 0 )
-					qt_MessageBox( &dialog, StringOutputStream( 64 )( copiedN, '/', files.size(), " files have been copied." ), "Moderate Success!" );
+					qt_MessageBox( &dialog, StringStream<64>( copiedN, '/', files.size(), " files have been copied." ), "Moderate Success!" );
 				else
 					qt_MessageBox( &dialog, "No files have been copied.", "Boo!" );
 
@@ -690,27 +690,25 @@ void DoShaderView( const char *shaderFileName, const char *shaderName, bool exte
 	const bool pathEmpty = string_empty( pathRoot );
 	const bool pathIsDir = !pathEmpty && file_is_directory( pathRoot );
 
-	StringOutputStream pathFull( 256 );
-	pathFull << pathRoot << ( pathIsDir? "" : "::" ) << shaderFileName;
+	const auto pathFull = StringStream( pathRoot, ( pathIsDir? "" : "::" ), shaderFileName );
 
 	if( pathEmpty ){
-		globalErrorStream() << "Failed to load shader file " << shaderFileName << "\n";
+		globalErrorStream() << "Failed to load shader file " << shaderFileName << '\n';
 	}
 	else if( external_editor && pathIsDir ){
 		if( g_TextEditor_editorCommand.empty() ){
 #ifdef WIN32
 			ShellExecute( (HWND)MainFrame_getWindow()->effectiveWinId(), 0, pathFull.c_str(), 0, 0, SW_SHOWNORMAL );
 #else
-			globalWarningStream() << "Failed to open '" << pathFull.c_str() << "'\nSet Shader Editor Command in preferences\n";
+			globalWarningStream() << "Failed to open '" << pathFull << "'\nSet Shader Editor Command in preferences\n";
 #endif
 		}
 		else{
-			StringOutputStream command( 256 );
-			command << g_TextEditor_editorCommand << " \"" << pathFull.c_str() << "\"";
-			globalOutputStream() << "Launching: " << command.c_str() << "\n";
+			auto command = StringStream( g_TextEditor_editorCommand, ' ', makeQuoted( pathFull ) );
+			globalOutputStream() << "Launching: " << command << '\n';
 			// note: linux does not return false if the command failed so it will assume success
-			if ( !Q_Exec( 0, const_cast<char*>( command.c_str() ), 0, true, false ) )
-				globalErrorStream() << "Failed to execute " << command.c_str() << "\n";
+			if ( !Q_Exec( 0, command.c_str(), 0, true, false ) )
+				globalErrorStream() << "Failed to execute " << command << '\n';
 		}
 	}
 	else if( ArchiveFile* file = GlobalFileSystem().openFile( shaderFileName ) ){
@@ -720,7 +718,7 @@ void DoShaderView( const char *shaderFileName, const char *shaderName, bool exte
 		text[size] = 0;
 		file->release();
 
-		g_textEditor.DoGtkTextEditor( text, shaderName, pathFull.c_str(), pathIsDir );
+		g_textEditor.DoGtkTextEditor( text, shaderName, pathFull, pathIsDir );
 		free( text );
 	}
 }

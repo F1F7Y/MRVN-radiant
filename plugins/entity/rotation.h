@@ -57,16 +57,16 @@ inline void write_rotation( const Float9 rotation, Entity* entity, const char* k
 	}
 	else
 	{
-		StringOutputStream value( 256 );
-		value << rotation[0] << ' '
-		      << rotation[1] << ' '
-		      << rotation[2] << ' '
-		      << rotation[3] << ' '
-		      << rotation[4] << ' '
-		      << rotation[5] << ' '
-		      << rotation[6] << ' '
-		      << rotation[7] << ' '
-		      << rotation[8];
+	const auto value = StringStream(
+			rotation[0], ' ',
+			rotation[1], ' ',
+			rotation[2], ' ',
+			rotation[3], ' ',
+			rotation[4], ' ',
+			rotation[5], ' ',
+			rotation[6], ' ',
+			rotation[7], ' ',
+			rotation[8] );
 		entity->setKeyValue( key, value.c_str() );
 	}
 }
