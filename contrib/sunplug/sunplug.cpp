@@ -25,6 +25,7 @@
 #include "iplugin.h"
 
 #include "string/string.h"
+#include "stream/stringstream.h"
 #include "modulesystem/singletonmodule.h"
 
 #include "iundo.h"       // declaration of undo system
@@ -260,8 +261,8 @@ void MapCoordinator(){
 
 					if( dialog.exec() ){
 						UndoableCommand undo( "SunPlug.entitySetMapcoords" );
-						theWorldspawn->setKeyValue( "mapcoordsmins", ( spin_minX->text() + ' ' + spin_minY->text() ).toLatin1().constData() );
-						theWorldspawn->setKeyValue( "mapcoordsmaxs", ( spin_maxX->text() + ' ' + spin_maxY->text() ).toLatin1().constData() );
+						theWorldspawn->setKeyValue( "mapcoordsmins", StringStream<64>( spin_minX->value(), ' ', spin_minY->value() ).toLatin1().constData() );
+						theWorldspawn->setKeyValue( "mapcoordsmaxs", StringStream<64>( spin_maxX->value(), ' ', spin_maxY->value() ).toLatin1().constData() );
 					}
 				}
 			}
