@@ -1343,6 +1343,7 @@ void Select_constructToolbar( QToolBar* toolbar ){
 
 void CSG_constructToolbar( QToolBar* toolbar ){
 	toolbar_append_button( toolbar, "CSG Subtract", "selection_csgsubtract.png", "CSGSubtract" );
+	toolbar_append_button( toolbar, "CSG Intersect", "selection_csgintersect.png", "CSGIntersect" );
 	toolbar_append_button( toolbar, "CSG Wrap Merge", "selection_csgmerge.png", "CSGWrapMerge" );
 	toolbar_append_button( toolbar, "Room", "selection_makeroom.png", "CSGroom" );
 	toolbar_append_button( toolbar, "CSG Tool", "ellipsis.png", "CSGTool" );
