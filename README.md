@@ -11,7 +11,7 @@ MRVN-Radiant is a fork of NetRadiant-custom (GtkRadiant 1.4 &rarr; massive rewri
 </div>
 
 ## Supported games
-- Titanfall Online ( Titanfall Online Revival )
+- Titanfall Online ( [TFORevive](https://tforevive.net/) )
 - Titanfall 2 ( [Northstar](https://northstar.tf) )
 - Apex Legends ( [R5Reloaded](https://r5reloaded.com/) )
 
@@ -32,6 +32,9 @@ MRVN-Radiant is a fork of NetRadiant-custom (GtkRadiant 1.4 &rarr; massive rewri
 ## Other tools
 - [bsp_tool](https://github.com/snake-biscuits/bsp_tool)
     - A Python library for analyzing .bsp files
+
+- [bsp_regen](https://github.com/snake-biscuits/bsp_regen)
+    - `Titanfall -> Titanfall | 2` Map Converter
 
 - [MRVN-Explorer](https://github.com/MRVN-Radiant/MRVN-Explorer)
     - A OpenGL/ImGui respawn bsp viewer
