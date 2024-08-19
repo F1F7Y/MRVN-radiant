@@ -26,9 +26,6 @@ MRVN-Radiant is a fork of NetRadiant-custom (GtkRadiant 1.4 &rarr; massive rewri
 
 > NOTE: These values are updated manually.
 
-## Running on wayland
- - When running on wayland you'll need to launch with `QT_QPA_PLATFORM=xcb` otherwise the OpenGL viewports wont clear properly.
-
 ## Other tools
 - [bsp_tool](https://github.com/snake-biscuits/bsp_tool)
     - A Python library for analyzing .bsp files
