@@ -251,7 +251,7 @@ public:
 		m_showShaders( true ),
 		m_showTextures( true ),
 		m_showTextureScrollbar( true ),
-		m_startupShaders( STARTUPSHADERS_NONE ),
+		m_startupShaders( STARTUPSHADERS_COMMON ),
 		m_hideUnused( false ),
 		m_searchedTags( false ),
 		m_tags( false ),
