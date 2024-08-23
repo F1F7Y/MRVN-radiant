@@ -30,8 +30,8 @@
   default_scale="0.25"
   q3map2_type="quake3"
   no_patch="0"
-  common_shaders_name="Common"
-  common_shaders_dir="common/"
+  common_shaders_name="Tools"
+  common_shaders_dir="tools/"
   no_bsp_monitor="0"
   shader_trigger="textures/tools/toolstrigger"
 />
